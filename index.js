@@ -35,3 +35,37 @@ app.delete('/items', (req, res) => {
     items.length=0
     res.send('all items has been deleted');
 });
+
+//Retrieve item by id
+app.get('/items/:id', (req, res) => {
+    const item = items.find(i => i.id === parseInt(req.params.id));
+        
+    if (!item) {
+        res.status(404).send('Item with that id dont exist');
+        return;
+    }
+    res.send(item);
+});
+
+//Delete item by id
+app.delete('/items/:id', (req, res) => {
+    const item = items.find( i=> i.id === parseInt(req.params.id));
+    if (!item) {
+        res.status(404).send('Item with that id dont exist');
+        return;
+    }
+    const index = items.indexOf(item);
+    items.splice(index,1);   
+    res.send(items);
+});
+
+//UPDATE item name by id
+app.put('/items/:id', (req, res) => {
+    const item = items.find( i=> i.id === parseInt(req.params.id));
+    if (!item) {
+        res.status(404).send('Item with that id dont exist');
+        return;
+    }   
+    item.name = req.body.name;
+    res.send(items);
+});
