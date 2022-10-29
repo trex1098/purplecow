@@ -12,7 +12,6 @@ app.listen(port,()=>{
 //Get list of items
 app.get('/items', (req, res) => {
     var itemSize = items.length;
-    console.log(`itemsize is ${itemSize}`);
     res.send(items);
 });
      
